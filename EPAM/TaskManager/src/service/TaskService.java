@@ -8,4 +8,6 @@ public interface TaskService {
     String showTasks();
 
     void doTask(String name);
+    
+    int count();
 }
