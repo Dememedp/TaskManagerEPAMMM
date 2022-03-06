@@ -9,6 +9,8 @@ import service.UserService;
 import service.exception.ServiceException;
 
 public class UserServiceImpl implements UserService{
+    int count = 0;
+    
     @Override
     public String signIn(String login, String password) throws ServiceException {
         if (login == null || login.isEmpty()){
@@ -29,6 +31,7 @@ public class UserServiceImpl implements UserService{
         UserDAO userDAO = daoObjectFactory.getUserDAO();
         User user = new User(name, role, login, password);
         userDAO.registration(user);
+        count();
     }
 
     @Override
@@ -43,5 +46,10 @@ public class UserServiceImpl implements UserService{
         DAOFactory daoObjectFactory = DAOFactory.getInstance();
         UserDAO userDAO = daoObjectFactory.getUserDAO();
         userDAO.deleteUser(name);
+    }
+    
+    @Override
+    public int count(){
+        return count + 1;
     }
 }
