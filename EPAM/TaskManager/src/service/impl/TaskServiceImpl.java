@@ -10,6 +10,7 @@ import service.exception.ServiceException;
 import java.util.ArrayList;
 
 public class TaskServiceImpl implements TaskService{
+    int count = 0;
     DAOFactory daoFactory = DAOFactory.getInstance();
     TaskDAO daoTask = daoFactory.getTaskDAO();
 
@@ -20,6 +21,7 @@ public class TaskServiceImpl implements TaskService{
         } else {
             try {
                 this.daoTask.addTask(new Task(taskName, taskDate, taskNote, taskCreator));
+                count();
             } catch (DAOException e) {
                 e.printStackTrace();
             }
@@ -46,5 +48,10 @@ public class TaskServiceImpl implements TaskService{
         DAOFactory daoObjectFactory = DAOFactory.getInstance();
         TaskDAO taskDAO = daoObjectFactory.getTaskDAO();
         taskDAO.doTask(name);
+    }
+    
+    @Override
+    public int count(){
+        return count + 1;
     }
 }
